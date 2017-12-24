@@ -29,6 +29,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import deprecated.ImageToServer;
+
 import static android.support.v4.content.FileProvider.getUriForFile;
 
 public class TakeImageActivity extends AppCompatActivity {

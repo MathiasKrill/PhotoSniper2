@@ -1,8 +1,4 @@
-package com.company.yolo.photosniper;
-
-import android.util.Base64;
-import android.util.Log;
-import android.widget.TextView;
+package deprecated;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

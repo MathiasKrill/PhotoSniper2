@@ -1,4 +1,4 @@
-package com.company.yolo.photosniper;
+package deprecated;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;

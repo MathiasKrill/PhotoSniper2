@@ -1,18 +1,8 @@
-package com.company.yolo.photosniper;
+package deprecated;
 
-import android.util.Log;
-
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
 import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.Enumeration;
 
 public class ImageToServerSocket {
     private static final int SERVERPORT = 5000;
