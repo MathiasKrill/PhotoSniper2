@@ -49,12 +49,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-//        buttonConnectToServer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ServerConnectionWebsocket.getInstantce().start();
-//            }
-//        });
+        buttonConnectToServer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final ServerCommunicatorWebSocket serverCommunicatorWebSocket = new ServerCommunicatorWebSocket(MainActivity.this);
+                serverCommunicatorWebSocket.connectToServer(new ServerCommunicatorWebSocket.Listener() {
+                    @Override
+                    public void onSuccess() {
+                        serverCommunicatorWebSocket.sendImageAsString("teststring");
+                    }
+
+                    @Override
+                    public void onAnswer(final String answer) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                textViewServerResult.setText(answer);
+                            }
+                        });
+                    }
+                });
+            }
+        });
 
     }
 
@@ -63,43 +79,28 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("MainActivity", "enter onActivityResult  [-] MainActivity [-] onActivityResult ");
 
-        if(requestCode == TakeImageActivity.REQUEST_IMAGE_CAPTURE_SIMPLE){
+        if (requestCode == TakeImageActivity.REQUEST_IMAGE_CAPTURE_SIMPLE) {
 
-            if(resultCode == RESULT_OK){
-
-               // sendImageToServer();
-//                final String length = String.valueOf(ImageHandler.getInstance().getImage().length);
-//                                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        textViewServerResult.setText(length);
-//                    }
-//                });
+            if (resultCode == RESULT_OK) {
 
                 final ServerCommunicatorWebSocket serverCommunicatorWebSocket = new ServerCommunicatorWebSocket(this);
                 serverCommunicatorWebSocket.connectToServer(new ServerCommunicatorWebSocket.Listener() {
                     @Override
                     public void onSuccess() {
-                        serverCommunicatorWebSocket.sendJson(encodeToBase64String(ImageHandler.getInstance().getImage()));
+                        serverCommunicatorWebSocket.sendImageAsString(encodeToBase64String(ImageHandler.getInstance().getImage()));
+                    }
+
+                    @Override
+                    public void onAnswer(final String answer) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                textViewServerResult.setText(answer);
+                            }
+                        });
                     }
                 });
 
-//                Bundle bundle = data.getExtras();
-//
-//                if(bundle == null){
-//                    Log.e("MainActivity", "bundle was null [-] MainActivity [-] onActivityResult ");
-//                    return;
-//                }
-//
-//                final String resultString = bundle.getString(TakeImageActivity.RESULT_KEY);
-//
-//                // Display on ui in the ui-thread
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        textViewServerResult.setText(resultString);
-//                    }
-//                });
 
             } else {
                 Log.e("MainActivity", "result was not okay  [-] MainActivity [-] onActivityResult ");
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
     public static String encodeToBase64String(byte[] file) {
         String encodedImage = Base64.encodeToString(file, Base64.DEFAULT);
         return encodedImage;

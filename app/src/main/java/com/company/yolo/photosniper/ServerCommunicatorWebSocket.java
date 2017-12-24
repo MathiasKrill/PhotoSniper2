@@ -27,6 +27,7 @@ public class ServerCommunicatorWebSocket {
 
     public interface Listener {
         void onSuccess();
+        void onAnswer(String answer);
     }
 
     WebSocketClient mWebSocketClient;
@@ -50,19 +51,8 @@ public class ServerCommunicatorWebSocket {
             @Override
             public void onMessage(String s) {
                 Log.d(TAG, "message received: " + s);
+                listener.onAnswer(s);
 
-                // TODO: read server response
-                /*
-
-                {
-                  "user_is_ok": "yes",
-                  "need_image": "no"
-                }
-
-                * */
-
-                // if need_image == yes >> send image
-                // sendImage();
             }
 
             @Override
@@ -78,7 +68,7 @@ public class ServerCommunicatorWebSocket {
         mWebSocketClient.connect();
     }
 
-    public void sendJson(String jsonAsString){
+    public void sendImageAsString(String jsonAsString){
         if(mWebSocketClient == null){
             return;
         }
