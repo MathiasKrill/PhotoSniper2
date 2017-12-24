@@ -15,7 +15,7 @@ public class ServerConnectionWebsocket {
     private OkHttpClient client;
     private static ServerConnectionWebsocket instance;
     private String webSocketAdresse = "ws://192.168.2.102:30000";
-    private ByteString dataToSend;
+    private String dataToSend;
 
     private ServerConnectionListener serverConnectionListener;
 
@@ -32,7 +32,13 @@ public class ServerConnectionWebsocket {
         return instance;
     }
 
+    public String getDataToSend() {
+        return dataToSend;
+    }
 
+    public void setDataToSend(String dataToSend) {
+        this.dataToSend = dataToSend;
+    }
 
     private final class EchoWebSocketListener extends WebSocketListener {
         private static final int NORMAL_CLOSURE_STATUS = 1000;
@@ -67,7 +73,7 @@ public class ServerConnectionWebsocket {
     }
 
 
-    public void send(byte [] data) {
+    public void send() {
 
         Request request = new Request.Builder().url(webSocketAdresse).build();
         EchoWebSocketListener listener = new EchoWebSocketListener();

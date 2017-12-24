@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import deprecated.ServerConnectionWebsocket;
+
 public class MainActivity extends AppCompatActivity {
 
     Button buttonTakeImageButton;
@@ -52,24 +54,27 @@ public class MainActivity extends AppCompatActivity {
         buttonConnectToServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final ServerCommunicatorWebSocket serverCommunicatorWebSocket = new ServerCommunicatorWebSocket(MainActivity.this);
-                serverCommunicatorWebSocket.setUri(editTextServerAdress.getText().toString());
-                serverCommunicatorWebSocket.connectToServer(new ServerCommunicatorWebSocket.Listener() {
-                    @Override
-                    public void onSuccess() {
-                        serverCommunicatorWebSocket.sendImageAsString("teststring");
-                    }
 
-                    @Override
-                    public void onAnswer(final String answer) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                textViewServerResult.setText(answer);
-                            }
-                        });
-                    }
-                });
+                ServerConnectionWebsocket.getInstantce().setDataToSend("teststring");
+                ServerConnectionWebsocket.getInstantce().send();
+//                final ServerCommunicatorWebSocket serverCommunicatorWebSocket = new ServerCommunicatorWebSocket(MainActivity.this);
+//                serverCommunicatorWebSocket.setUri(editTextServerAdress.getText().toString());
+//                serverCommunicatorWebSocket.connectToServer(new ServerCommunicatorWebSocket.Listener() {
+//                    @Override
+//                    public void onSuccess() {
+//                        serverCommunicatorWebSocket.sendImageAsString("teststring");
+//                    }
+//
+//                    @Override
+//                    public void onAnswer(final String answer) {
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                textViewServerResult.setText(answer);
+//                            }
+//                        });
+//                    }
+//                });
             }
         });
 
