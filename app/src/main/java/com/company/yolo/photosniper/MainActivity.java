@@ -66,7 +66,15 @@ public class MainActivity extends AppCompatActivity {
 
             if(resultCode == RESULT_OK){
 
-                sendImageToServer();
+               // sendImageToServer();
+                final String length = String.valueOf(ImageHandler.getInstance().getImage().length);
+                                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        textViewServerResult.setText(length);
+                    }
+                });
+
 //                Bundle bundle = data.getExtras();
 //
 //                if(bundle == null){
