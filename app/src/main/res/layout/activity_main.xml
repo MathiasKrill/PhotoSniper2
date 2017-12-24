@@ -44,8 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:hint="ws://echo.websocket.org"
-        android:text="ws://echo.websocket.org" />
+        android:text="ws://192.168.2.102:30000" />
 
     <Button
         android:id="@+id/button_connect_to_websocket"
@@ -58,7 +57,7 @@
         android:textColor="#FFFFFF"
         android:padding="5dp"
         android:background="@drawable/photo_sniper_button"
-        android:text="Connect to server" />
+        android:text="Test Connect to server" />
 
     <TextView
         android:id="@+id/textView_server_status"

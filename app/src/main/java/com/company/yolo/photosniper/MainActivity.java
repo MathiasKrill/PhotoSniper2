@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final ServerCommunicatorWebSocket serverCommunicatorWebSocket = new ServerCommunicatorWebSocket(MainActivity.this);
+                serverCommunicatorWebSocket.setUri(editTextServerAdress.getText().toString());
                 serverCommunicatorWebSocket.connectToServer(new ServerCommunicatorWebSocket.Listener() {
                     @Override
                     public void onSuccess() {

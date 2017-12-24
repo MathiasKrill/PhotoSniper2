@@ -20,26 +20,31 @@ import java.util.List;
 public class ServerCommunicatorWebSocket {
     final String TAG = "ServerCommunicator";
     public static Context mContext;
+    String uriString = null;
+    URI uri;
 
-    public ServerCommunicatorWebSocket(Context context){
+    public ServerCommunicatorWebSocket(Context context) {
         mContext = context;
     }
 
     public interface Listener {
         void onSuccess();
+
         void onAnswer(String answer);
+    }
+
+    public void setUri(String uri) {
+        this.uriString = uri;
+    }
+
+    public String getUri() {
+        return uriString;
     }
 
     WebSocketClient mWebSocketClient;
 
-    public void connectToServer(final Listener listener){
-        URI uri;
-        try {
-            uri = new URI("ws://ws://192.168.2.102:30000");
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-            return;
-        }
+    public void connectToServer(final Listener listener) {
+        uri = URI.create(uriString);
 
         mWebSocketClient = new WebSocketClient(uri) {
             @Override
@@ -68,12 +73,12 @@ public class ServerCommunicatorWebSocket {
         mWebSocketClient.connect();
     }
 
-    public void sendImageAsString(String jsonAsString){
-        if(mWebSocketClient == null){
+    public void sendImageAsString(String jsonAsString) {
+        if (mWebSocketClient == null) {
             return;
         }
 
-            mWebSocketClient.send(jsonAsString);
+        mWebSocketClient.send(jsonAsString);
 
     }
 
