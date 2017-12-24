@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.company.yolo.photosniper.TakeImageActivity">
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/textview_server_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="placeholder for server answer" />
+
+    <Button
+        android:id="@+id/button_take_image"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/textview_server_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:padding="5dp"
+        android:background="@drawable/photo_sniper_button"
+        android:text="Take image" />
+
+    <View
+        android:layout_marginTop="20dp"
+        android:id="@+id/view_line_break"
+        android:layout_below="@id/button_take_image"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary" />
+
+
+    <EditText
+        android:layout_below="@id/view_line_break"
+
+        android:layout_marginTop="20dp"
+        android:id="@+id/edittext_server_adress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="ws://echo.websocket.org"
+        android:text="ws://echo.websocket.org" />
+
+    <Button
+        android:id="@+id/button_connect_to_websocket"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/edittext_server_adress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:padding="5dp"
+        android:background="@drawable/photo_sniper_button"
+        android:text="Connect to server" />
+
+    <TextView
+        android:id="@+id/textView_server_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_connect_to_websocket"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:text="" />
+
+</RelativeLayout>

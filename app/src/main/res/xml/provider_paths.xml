@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- todo: change to internal -->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <files-path name="camera_images" path="images/"/>
+    <files-path name="shared_files" path="sharefiles/"/>
+</paths>
