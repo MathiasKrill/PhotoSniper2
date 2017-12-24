@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -67,11 +68,19 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
 
                // sendImageToServer();
-                final String length = String.valueOf(ImageHandler.getInstance().getImage().length);
-                                runOnUiThread(new Runnable() {
+//                final String length = String.valueOf(ImageHandler.getInstance().getImage().length);
+//                                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        textViewServerResult.setText(length);
+//                    }
+//                });
+
+                final ServerCommunicatorWebSocket serverCommunicatorWebSocket = new ServerCommunicatorWebSocket(this);
+                serverCommunicatorWebSocket.connectToServer(new ServerCommunicatorWebSocket.Listener() {
                     @Override
-                    public void run() {
-                        textViewServerResult.setText(length);
+                    public void onSuccess() {
+                        serverCommunicatorWebSocket.sendJson(encodeToBase64String(ImageHandler.getInstance().getImage()));
                     }
                 });
 
@@ -98,13 +107,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-
-    public void sendImageToServer(){
-        byte[] image = ImageHandler.getInstance().getImage();
+    public static String encodeToBase64String(byte[] file) {
+        String encodedImage = Base64.encodeToString(file, Base64.DEFAULT);
+        return encodedImage;
     }
-
-
-
 
 }

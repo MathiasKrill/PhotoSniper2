@@ -18,7 +18,7 @@ import okio.ByteString;
 public class ServerConnectionWebsocket {
     private OkHttpClient client;
     private static ServerConnectionWebsocket instance;
-    private String webSocketAdresse = "ws://echo.websocket.org";
+    private String webSocketAdresse = "ws://192.168.2.102:30000";
     private ByteString dataToSend;
 
     private ServerConnectionListener serverConnectionListener;
@@ -72,7 +72,6 @@ public class ServerConnectionWebsocket {
 
 
     public void send(byte [] data) {
-
 
         Request request = new Request.Builder().url(webSocketAdresse).build();
         EchoWebSocketListener listener = new EchoWebSocketListener();

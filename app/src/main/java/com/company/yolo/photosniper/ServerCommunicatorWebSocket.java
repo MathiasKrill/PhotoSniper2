@@ -34,7 +34,7 @@ public class ServerCommunicatorWebSocket {
     public void connectToServer(final Listener listener){
         URI uri;
         try {
-            uri = new URI("ws://echo.websocket.org");
+            uri = new URI("ws://ws://192.168.2.102:30000");
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return;
@@ -44,9 +44,6 @@ public class ServerCommunicatorWebSocket {
             @Override
             public void onOpen(ServerHandshake serverHandshake) {
                 Log.i("Websocket", "Opened websocket [-] ServerCommunicatorWebSocket [-] connectToServer [-] WebSocketClient");
-
-//                mWebSocketClient.send("Hello from " + Build.MANUFACTURER + " " + Build.MODEL);
-
                 listener.onSuccess();
             }
 
