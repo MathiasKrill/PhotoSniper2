@@ -78,7 +78,7 @@ public class ServerConnectionWebsocket {
         Request request = new Request.Builder().url(webSocketAdresse).build();
         EchoWebSocketListener listener = new EchoWebSocketListener();
         WebSocket ws = client.newWebSocket(request, listener);
-        client.dispatcher().executorService().shutdown();
+       // client.dispatcher().executorService().shutdown();
     }
 
     private void triggerCallback(String result){
