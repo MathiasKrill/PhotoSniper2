@@ -89,24 +89,27 @@ public class MainActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
 
-                final ServerCommunicatorWebSocket serverCommunicatorWebSocket = new ServerCommunicatorWebSocket(this);
-                serverCommunicatorWebSocket.setUri(editTextServerAdress.getText().toString());
-                serverCommunicatorWebSocket.connectToServer(new ServerCommunicatorWebSocket.Listener() {
-                    @Override
-                    public void onSuccess() {
-                        serverCommunicatorWebSocket.sendImageAsString(encodeToBase64String(ImageHandler.getInstance().getImage()));
-                    }
+                ServerConnectionWebsocket.getInstantce().setDataToSend(encodeToBase64String(ImageHandler.getInstance().getImage()));
+                ServerConnectionWebsocket.getInstantce().send();
 
-                    @Override
-                    public void onAnswer(final String answer) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                textViewServerResult.setText(answer);
-                            }
-                        });
-                    }
-                });
+//                final ServerCommunicatorWebSocket serverCommunicatorWebSocket = new ServerCommunicatorWebSocket(this);
+//                serverCommunicatorWebSocket.setUri(editTextServerAdress.getText().toString());
+//                serverCommunicatorWebSocket.connectToServer(new ServerCommunicatorWebSocket.Listener() {
+//                    @Override
+//                    public void onSuccess() {
+//                        serverCommunicatorWebSocket.sendImageAsString(encodeToBase64String(ImageHandler.getInstance().getImage()));
+//                    }
+//
+//                    @Override
+//                    public void onAnswer(final String answer) {
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                textViewServerResult.setText(answer);
+//                            }
+//                        });
+//                    }
+//                });
 
 
             } else {
