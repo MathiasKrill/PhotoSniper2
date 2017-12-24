@@ -163,10 +163,22 @@ public class TakeImageActivity extends AppCompatActivity {
 
             // Try to get the image from the data
             if (data != null && data.getExtras() != null) {
+                Log.d("TakingImage", "data was not null [-] PhotoActivity [-] onActivityResult [-] data");
+
                 Bitmap image = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
                 image.compress(Bitmap.CompressFormat.PNG, 100, byteBuffer);
                 imageBytes = byteBuffer.toByteArray();
+
+                if(imageBytes != null){
+                    Log.d("TakingImage", "could read image from data extras [-] PhotoActivity [-] onActivityResult [-] data");
+
+                    ImageHandler.getInstance().setImage(imageBytes);
+                    closeWithSuccess();
+                    return;
+                } else {
+                    failedTakingImage();
+                }
             }
 
 
@@ -179,7 +191,7 @@ public class TakeImageActivity extends AppCompatActivity {
                     failedTakingImage();
                     return;
                 } else {
-
+                    Log.d("TakingImage", "could read image from uri successfull [-] PhotoActivity [-] onActivityResult [-] data");
                     ImageHandler.getInstance().setImage(imageBytes);
                     closeWithSuccess();
                 }
