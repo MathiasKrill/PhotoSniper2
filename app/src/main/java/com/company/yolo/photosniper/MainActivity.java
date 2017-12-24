@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
                 final ServerCommunicatorWebSocket serverCommunicatorWebSocket = new ServerCommunicatorWebSocket(this);
+                serverCommunicatorWebSocket.setUri(editTextServerAdress.getText().toString());
                 serverCommunicatorWebSocket.connectToServer(new ServerCommunicatorWebSocket.Listener() {
                     @Override
                     public void onSuccess() {
