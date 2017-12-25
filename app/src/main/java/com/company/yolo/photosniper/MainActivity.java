@@ -3,6 +3,7 @@ package com.company.yolo.photosniper;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -11,8 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import deprecated.ServerConnectionWebsocket;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,26 +54,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                ServerConnectionWebsocket.getInstantce().setDataToSend("teststring");
-                ServerConnectionWebsocket.getInstantce().send();
-//                final ServerCommunicatorWebSocket serverCommunicatorWebSocket = new ServerCommunicatorWebSocket(MainActivity.this);
-//                serverCommunicatorWebSocket.setUri(editTextServerAdress.getText().toString());
-//                serverCommunicatorWebSocket.connectToServer(new ServerCommunicatorWebSocket.Listener() {
-//                    @Override
-//                    public void onSuccess() {
-//                        serverCommunicatorWebSocket.sendImageAsString("teststring");
-//                    }
-//
-//                    @Override
-//                    public void onAnswer(final String answer) {
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                textViewServerResult.setText(answer);
-//                            }
-//                        });
-//                    }
-//                });
+                ServerConnectionWebsocket serverConnectionWebsocket = new ServerConnectionWebsocket();
+                serverConnectionWebsocket.setWebSocketAdresse(editTextServerAdress.getText().toString());
+                serverConnectionWebsocket.send("yoloooo".getBytes(), new ServerConnectionWebsocket.ServerResultCallback() {
+                    @Override
+                    public void serverConnected(final String status) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                textViewServerStatus.setText(status);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void resultCallback(final String result) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                textViewServerResult.setText(result);
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -89,27 +91,29 @@ public class MainActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
 
-                ServerConnectionWebsocket.getInstantce().setDataToSend(encodeToBase64String(ImageHandler.getInstance().getImage()));
-                ServerConnectionWebsocket.getInstantce().send();
+                ServerConnectionWebsocket serverConnectionWebsocket = new ServerConnectionWebsocket();
+                serverConnectionWebsocket.setWebSocketAdresse(editTextServerAdress.getText().toString());
+                serverConnectionWebsocket.send(ImageHandler.getInstance().getImage(), new ServerConnectionWebsocket.ServerResultCallback() {
+                    @Override
+                    public void serverConnected(final String status) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                textViewServerStatus.setText(status);
+                            }
+                        });
+                    }
 
-//                final ServerCommunicatorWebSocket serverCommunicatorWebSocket = new ServerCommunicatorWebSocket(this);
-//                serverCommunicatorWebSocket.setUri(editTextServerAdress.getText().toString());
-//                serverCommunicatorWebSocket.connectToServer(new ServerCommunicatorWebSocket.Listener() {
-//                    @Override
-//                    public void onSuccess() {
-//                        serverCommunicatorWebSocket.sendImageAsString(encodeToBase64String(ImageHandler.getInstance().getImage()));
-//                    }
-//
-//                    @Override
-//                    public void onAnswer(final String answer) {
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                textViewServerResult.setText(answer);
-//                            }
-//                        });
-//                    }
-//                });
+                    @Override
+                    public void resultCallback(final String result) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                textViewServerResult.setText(result);
+                            }
+                        });
+                    }
+                });
 
 
             } else {
@@ -123,5 +127,6 @@ public class MainActivity extends AppCompatActivity {
         String encodedImage = Base64.encodeToString(file, Base64.DEFAULT);
         return encodedImage;
     }
+
 
 }
