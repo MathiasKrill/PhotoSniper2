@@ -57,7 +57,7 @@
         android:textColor="#FFFFFF"
         android:padding="5dp"
         android:background="@drawable/photo_sniper_button"
-        android:text="Test Connect to server" />
+        android:text="Pick file from gallery" />
 
     <TextView
         android:id="@+id/textView_server_status"
