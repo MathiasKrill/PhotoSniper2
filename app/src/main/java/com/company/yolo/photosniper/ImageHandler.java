@@ -6,11 +6,29 @@ package com.company.yolo.photosniper;
 
 public class ImageHandler {
 
+    private float imageHeight;
+    private float imageWidth;
     private byte[] image;
     private static ImageHandler instance;
 
     private ImageHandler() {
 
+    }
+
+    public float getImageHeight() {
+        return imageHeight;
+    }
+
+    public void setImageHeight(float imageHeight) {
+        this.imageHeight = imageHeight;
+    }
+
+    public float getImageWidth() {
+        return imageWidth;
+    }
+
+    public void setImageWidth(float imageWidth) {
+        this.imageWidth = imageWidth;
     }
 
     public static ImageHandler getInstance() {

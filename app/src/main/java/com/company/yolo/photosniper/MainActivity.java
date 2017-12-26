@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -24,8 +25,10 @@ public class MainActivity extends AppCompatActivity {
     Button buttonTakeImageButton;
     Button buttonConnectToServer;
     TextView textViewServerResult;
-    TextView textViewServerStatus;
     EditText editTextServerAdress;
+    EditText editTextWidth;
+    EditText editTextHeight;
+
 
 
     @Override
@@ -42,13 +45,20 @@ public class MainActivity extends AppCompatActivity {
         buttonConnectToServer = (Button) findViewById(R.id.button_connect_to_websocket);
 
         textViewServerResult = (TextView) findViewById(R.id.textview_server_result);
-        textViewServerStatus = (TextView) findViewById(R.id.textView_server_status);
         editTextServerAdress = (EditText) findViewById(R.id.edittext_server_adress);
+
+        editTextWidth = (EditText) findViewById(R.id.edittext_width);
+        editTextHeight = (EditText) findViewById(R.id.edittext_height);
+        editTextHeight.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        editTextWidth.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
 
         buttonTakeImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ImageHandler.getInstance().setImageHeight(Float.valueOf(editTextHeight.getText().toString()));
+                ImageHandler.getInstance().setImageWidth(Float.valueOf(editTextWidth.getText().toString()));
+
                 Intent intent = new Intent(MainActivity.this, TakeImageActivity.class);
                 startActivityForResult(intent, TakeImageActivity.REQUEST_IMAGE_CAPTURE_SIMPLE);
             }
@@ -58,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
         buttonConnectToServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ImageHandler.getInstance().setImageHeight(Float.valueOf(editTextHeight.getText().toString()));
+                ImageHandler.getInstance().setImageWidth(Float.valueOf(editTextWidth.getText().toString()));
+
                 willPickGalleryItem(MainActivity.this);
             }
         });
@@ -115,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textViewServerStatus.setText(status);
+
                     }
                 });
             }

@@ -7,65 +7,102 @@
     tools:context="com.company.yolo.photosniper.TakeImageActivity">
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/textview_server_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="placeholder for server answer" />
-
-    <Button
-        android:id="@+id/button_take_image"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/textview_server_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_centerHorizontal="true"
-        android:textColor="#FFFFFF"
-        android:padding="5dp"
-        android:background="@drawable/photo_sniper_button"
-        android:text="Take image" />
+        android:text="placeholder for server answer"
+        android:textSize="16dp" />
 
     <View
-        android:layout_marginTop="20dp"
         android:id="@+id/view_line_break"
-        android:layout_below="@id/button_take_image"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@id/textview_server_result"
+        android:layout_marginTop="20dp"
         android:background="@color/colorPrimary" />
 
 
     <EditText
-        android:layout_below="@id/view_line_break"
-
-        android:layout_marginTop="20dp"
         android:id="@+id/edittext_server_adress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_line_break"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:text="ws://demos.kaazing.com/echo" />
+
+    <LinearLayout
+        android:id="@+id/linear_image_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_server_adress"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edittext_width"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:hint="maximum width"
+            android:text="812" />
+
+        <EditText
+            android:id="@+id/edittext_height"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:hint="maximum height"
+            android:text="612" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_line_break_3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/linear_image_size"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/button_take_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/view_line_break_3"
         android:layout_centerHorizontal="true"
-        android:text="ws://demos.kaazing.com/echo" />
+        android:layout_marginTop="20dp"
+        android:background="@drawable/photo_sniper_button"
+        android:padding="5dp"
+        android:text="Take image"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+
+    <View
+        android:id="@+id/view_line_break_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/button_take_image"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary" />
+
 
     <Button
         android:id="@+id/button_connect_to_websocket"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/edittext_server_adress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:layout_below="@id/view_line_break_2"
         android:layout_centerHorizontal="true"
-        android:textColor="#FFFFFF"
-        android:padding="5dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/photo_sniper_button"
-        android:text="Pick file from gallery" />
+        android:padding="5dp"
+        android:text="Pick file from gallery"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/textView_server_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_connect_to_websocket"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
-        android:text="" />
 
 </RelativeLayout>
